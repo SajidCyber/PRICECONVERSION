@@ -1,0 +1,12 @@
+title,price,currency,marketplace_id,external_id,brand,category,shipping_price,discount_pct,availability_status,rating,url
+Apple MacBook Pro 14 M3 512GB Space Gray,1549.00,USD,amazon_us,APL-MBP14-US,Apple,Electronics,0.00,3.13,in_stock,4.8,https://amazon.com/dp/APL-MBP14-US
+Apple MacBook Pro 14 M3 512GB Space Gray,1429.00,GBP,amazon_uk,APL-MBP14-UK,Apple,Electronics,4.99,0.00,in_stock,4.7,https://amazon.co.uk/dp/APL-MBP14-UK
+Apple MacBook Pro 14 M3 512GB Space Gray,159900.00,INR,flipkart_in,APL-MBP14-IN,Apple,Electronics,0.00,5.00,in_stock,4.6,https://flipkart.com/p/APL-MBP14-IN
+Sony WH-1000XM5 Noise Canceling Headphones,348.00,USD,amazon_us,SNY-WH1000-US,Sony,Electronics,0.00,13.00,in_stock,4.6,https://amazon.com/dp/SNY-WH1000-US
+Sony WH-1000XM5 Noise Canceling Headphones,289.00,GBP,amazon_uk,SNY-WH1000-UK,Sony,Electronics,0.00,15.00,in_stock,4.5,https://amazon.co.uk/dp/SNY-WH1000-UK
+Sony WH-1000XM5 Noise Canceling Headphones,29990.00,INR,flipkart_in,SNY-WH1000-IN,Sony,Electronics,0.00,10.00,in_stock,4.7,https://flipkart.com/p/SNY-WH1000-IN
+Samsung Galaxy S24 Ultra 256GB Titanium,1199.99,USD,amazon_us,SAM-S24U-US,Samsung,Smartphones,0.00,8.00,in_stock,4.7,https://amazon.com/dp/SAM-S24U-US
+Samsung Galaxy S24 Ultra 256GB Titanium,1049.00,GBP,amazon_uk,SAM-S24U-UK,Samsung,Smartphones,0.00,10.00,in_stock,4.6,https://amazon.co.uk/dp/SAM-S24U-UK
+Samsung Galaxy S24 Ultra 256GB Titanium,124999.00,INR,flipkart_in,SAM-S24U-IN,Samsung,Smartphones,0.00,6.00,in_stock,4.8,https://flipkart.com/p/SAM-S24U-IN
+Dyson V15 Detect Cordless Vacuum Cleaner,749.00,USD,amazon_us,DYS-V15-US,Dyson,Home Appliances,0.00,0.00,in_stock,4.6,https://amazon.com/dp/DYS-V15-US
+Dyson V15 Detect Cordless Vacuum Cleaner,599.00,GBP,amazon_uk,DYS-V15-UK,Dyson,Home Appliances,0.00,0.00,in_stock,4.5,https://amazon.co.uk/dp/DYS-V15-UK

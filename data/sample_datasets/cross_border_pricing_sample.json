@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Kindle Paperwhite 16GB (11th Gen) - Denim",
+    "price": 149.99,
+    "currency": "USD",
+    "marketplace_id": "amazon_us",
+    "external_id": "AMZ-KNDL-PW-US",
+    "brand": "Amazon",
+    "category": "Electronics",
+    "shipping": 0.0,
+    "discount_pct": 0.0,
+    "availability_status": "in_stock",
+    "rating": 4.7,
+    "url": "https://amazon.com/dp/AMZ-KNDL-PW-US"
+  },
+  {
+    "title": "Kindle Paperwhite 16GB (11th Gen) - Denim",
+    "price": 129.99,
+    "currency": "GBP",
+    "marketplace_id": "amazon_uk",
+    "external_id": "AMZ-KNDL-PW-UK",
+    "brand": "Amazon",
+    "category": "Electronics",
+    "shipping": 3.99,
+    "discount_pct": 5.0,
+    "availability_status": "in_stock",
+    "rating": 4.6,
+    "url": "https://amazon.co.uk/dp/AMZ-KNDL-PW-UK"
+  },
+  {
+    "title": "Kindle Paperwhite 16GB (11th Gen) - Denim",
+    "price": 14999.0,
+    "currency": "INR",
+    "marketplace_id": "flipkart_in",
+    "external_id": "FLIP-KNDL-PW-IN",
+    "brand": "Amazon",
+    "category": "Electronics",
+    "shipping": 0.0,
+    "discount_pct": 0.0,
+    "availability_status": "in_stock",
+    "rating": 4.5,
+    "url": "https://flipkart.com/p/FLIP-KNDL-PW-IN"
+  }
+]
