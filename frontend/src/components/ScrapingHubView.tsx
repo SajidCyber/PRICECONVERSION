@@ -5,12 +5,11 @@ import {
   Terminal,
   Play,
   CheckCircle2,
-  AlertOctagon,
-  Clock,
   ShieldCheck,
-  Globe2,
   RefreshCw,
+  Activity,
   Layers,
+  Cpu,
 } from 'lucide-react';
 import { ScraperAdapterInfo, ScrapingJobResponse } from '@/types';
 import { apiClient } from '@/services/api';
@@ -103,48 +102,55 @@ export const ScrapingHubView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 backdrop-blur-md">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-3xl border border-white/[0.08] bg-gradient-to-r from-white/[0.05] via-[#091124] to-[#040814] p-6 backdrop-blur-2xl shadow-xl">
+        <div className="flex items-center gap-3.5">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+            <Terminal className="h-6 w-6" />
+          </div>
           <div>
-            <div className="flex items-center gap-2">
-              <Terminal className="h-5 w-5 text-cyan-400" />
-              <h2 className="text-base font-bold text-white">Live Web Scraping & Ingestion Hub</h2>
-            </div>
+            <h2 className="text-xl font-black text-white tracking-tight">
+              Distributed Web Ingestion & Harvesting Operations
+            </h2>
             <p className="text-xs text-slate-400 mt-0.5">
-              Execute live HTML parsers, mock catalog APIs, and monitor extraction telemetry
+              Execute live HTML parsers, structured market adapters, and inspect real-time extraction telemetry
             </p>
           </div>
+        </div>
 
-          <div className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20">
-            <ShieldCheck className="h-4 w-4" />
-            <span>Pre-flight SSRF & DNS Filter Active</span>
-          </div>
+        <div className="flex items-center gap-2 text-xs font-bold text-emerald-300 bg-emerald-500/15 px-3.5 py-2 rounded-2xl border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+          <ShieldCheck className="h-4 w-4" />
+          <span>SSRF IP FILTER: ACTIVE</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column: Job Launcher & Controls */}
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 space-y-4 backdrop-blur-md">
-          <h3 className="text-sm font-bold text-white flex items-center gap-2">
-            <Play className="h-4 w-4 text-indigo-400" />
-            Trigger Scraping Execution
-          </h3>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left Column: Job Launcher & Controls (5 cols) */}
+        <div className="lg:col-span-5 rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-transparent p-6 space-y-5 backdrop-blur-2xl shadow-xl">
+          <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+            <h3 className="text-sm font-extrabold text-white flex items-center gap-2">
+              <Play className="h-4 w-4 text-cyan-400" />
+              Scraper Execution Sandbox
+            </h3>
+            <span className="text-[10px] text-cyan-300 font-mono font-bold bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20">
+              DISPATCH
+            </span>
+          </div>
 
-          <div className="space-y-3 text-xs">
+          <div className="space-y-4 text-xs">
             {/* Adapter Selector */}
             <div>
-              <label className="text-slate-400 font-medium block mb-1">Target Scraper Adapter</label>
+              <label className="text-slate-400 font-semibold block mb-1.5">Target Scraper Adapter</label>
               <select
                 value={selectedAdapter}
                 onChange={(e) => setSelectedAdapter(e.target.value)}
-                className="w-full rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-slate-200 focus:border-cyan-400 focus:outline-none cursor-pointer"
+                className="w-full rounded-2xl border border-white/[0.1] bg-black/40 p-3 text-slate-200 font-semibold focus:border-cyan-400 focus:outline-none cursor-pointer transition"
               >
                 {adapters.map((a, idx) => {
                   const mId = a.marketplace_id || a.id || `adapter_${idx}`;
                   const mName = a.marketplace_name || a.name || a.adapter_name || mId;
                   const mType = a.is_live_scraper ? 'Live HTML' : 'API Feed';
                   return (
-                    <option key={mId} value={mId}>
+                    <option key={mId} value={mId} className="bg-slate-950 text-white">
                       {mName} ({mType})
                     </option>
                   );
@@ -154,21 +160,23 @@ export const ScrapingHubView: React.FC = () => {
 
             {/* Category */}
             <div>
-              <label className="text-slate-400 font-medium block mb-1">Category Filter</label>
+              <label className="text-slate-400 font-semibold block mb-1.5">Category Target</label>
               <input
                 type="text"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 placeholder="e.g. travel, laptops, smartphones"
-                className="w-full rounded-xl border border-slate-700 bg-slate-950 p-2.5 text-slate-200 focus:border-cyan-400 focus:outline-none"
+                className="w-full rounded-2xl border border-white/[0.1] bg-black/40 p-3 text-slate-200 font-medium focus:border-cyan-400 focus:outline-none transition"
               />
             </div>
 
             {/* Max Pages Slider */}
-            <div>
-              <div className="flex justify-between text-slate-400 mb-1">
+            <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
+              <div className="flex justify-between text-slate-300 font-semibold mb-2">
                 <span>Max Crawl Depth</span>
-                <span className="font-mono text-cyan-400 font-bold">{maxPages} Pages</span>
+                <span className="font-mono text-cyan-300 font-bold bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20">
+                  {maxPages} Pages
+                </span>
               </div>
               <input
                 type="range"
@@ -176,15 +184,17 @@ export const ScrapingHubView: React.FC = () => {
                 max="5"
                 value={maxPages}
                 onChange={(e) => setMaxPages(Number(e.target.value))}
-                className="w-full accent-cyan-400 cursor-pointer"
+                className="w-full cursor-pointer"
               />
             </div>
 
             {/* Rate Limit Delay Slider */}
-            <div>
-              <div className="flex justify-between text-slate-400 mb-1">
+            <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
+              <div className="flex justify-between text-slate-300 font-semibold mb-2">
                 <span>Politeness Rate Delay</span>
-                <span className="font-mono text-cyan-400 font-bold">{delaySeconds}s</span>
+                <span className="font-mono text-cyan-300 font-bold bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20">
+                  {delaySeconds}s
+                </span>
               </div>
               <input
                 type="range"
@@ -193,7 +203,7 @@ export const ScrapingHubView: React.FC = () => {
                 step="0.5"
                 value={delaySeconds}
                 onChange={(e) => setDelaySeconds(Number(e.target.value))}
-                className="w-full accent-cyan-400 cursor-pointer"
+                className="w-full cursor-pointer"
               />
             </div>
 
@@ -201,66 +211,80 @@ export const ScrapingHubView: React.FC = () => {
             <button
               onClick={handleRunScraper}
               disabled={isRunning}
-              className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 py-3 font-semibold text-white shadow-lg shadow-indigo-500/20 hover:opacity-90 transition disabled:opacity-50 cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-indigo-700 py-3.5 font-bold text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-[1.01] transition disabled:opacity-50 cursor-pointer"
             >
               {isRunning ? (
                 <>
                   <RefreshCw className="h-4 w-4 animate-spin" />
-                  <span>Extracting Data...</span>
+                  <span>Harvesting Observations...</span>
                 </>
               ) : (
                 <>
                   <Play className="h-4 w-4 fill-white" />
-                  <span>Launch Scraper Job</span>
+                  <span>Execute Scraper Dispatch</span>
                 </>
               )}
             </button>
           </div>
         </div>
 
-        {/* Right Columns: Active Telemetry & Logs */}
-        <div className="lg:col-span-2 space-y-4">
+        {/* Right Columns: Active Telemetry & Logs (7 cols) */}
+        <div className="lg:col-span-7 space-y-5">
           {/* Last Job Telemetry */}
           {lastJob && (
-            <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 space-y-2">
+            <div className="rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-emerald-500/10 to-transparent p-5 space-y-3 backdrop-blur-2xl shadow-xl">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-xs text-emerald-400 flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4" /> Last Job Completed ({lastJob.id.slice(0, 8)})
+                <span className="font-extrabold text-xs text-emerald-300 flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                  Last Execution Finished ({lastJob.id.slice(0, 8)})
                 </span>
-                <span className="font-mono text-[10px] text-slate-400">{lastJob.created_at}</span>
+                <span className="font-mono text-[10px] text-slate-400 font-medium">{lastJob.created_at}</span>
               </div>
-              <div className="grid grid-cols-3 gap-2 text-xs font-mono pt-1">
-                <div>Discovered: <span className="text-white font-bold">{lastJob.items_discovered}</span></div>
-                <div>Extracted: <span className="text-emerald-300 font-bold">{lastJob.items_extracted}</span></div>
-                <div>Errors: <span className="text-rose-400 font-bold">{lastJob.error_count}</span></div>
+              <div className="grid grid-cols-3 gap-3 text-xs font-mono pt-1">
+                <div className="rounded-xl bg-black/40 p-2.5 border border-white/[0.05]">
+                  <span className="text-slate-400 block text-[10px]">Discovered</span>
+                  <span className="text-white font-black text-sm">{lastJob.items_discovered}</span>
+                </div>
+                <div className="rounded-xl bg-black/40 p-2.5 border border-white/[0.05]">
+                  <span className="text-slate-400 block text-[10px]">Extracted</span>
+                  <span className="text-emerald-300 font-black text-sm">{lastJob.items_extracted}</span>
+                </div>
+                <div className="rounded-xl bg-black/40 p-2.5 border border-white/[0.05]">
+                  <span className="text-slate-400 block text-[10px]">Errors</span>
+                  <span className="text-rose-400 font-black text-sm">{lastJob.error_count}</span>
+                </div>
               </div>
             </div>
           )}
 
           {/* Real-Time Terminal Console */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4 space-y-2">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <div className="flex items-center gap-2">
+          <div className="rounded-3xl border border-white/[0.08] bg-black/80 backdrop-blur-2xl p-5 space-y-3 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
+              <div className="flex items-center gap-2.5">
                 <div className="flex gap-1.5">
                   <div className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
                   <div className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
                   <div className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
                 </div>
-                <span className="text-[11px] font-mono text-slate-400">scraper_telemetry.log</span>
+                <span className="text-[11px] font-mono font-bold text-slate-300">scraper_telemetry.log</span>
               </div>
-              <span className="text-[10px] text-slate-500">Live stdout</span>
+              <span className="text-[10px] text-emerald-400 font-mono flex items-center gap-1.5 font-bold">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                STDOUT LIVE
+              </span>
             </div>
 
-            <div className="h-64 overflow-y-auto space-y-1.5 font-mono text-[11px] text-slate-300 p-2">
+            <div className="h-72 overflow-y-auto space-y-2 font-mono text-[11px] text-slate-300 p-2">
               {recentLogs.length > 0 ? (
                 recentLogs.map((log, i) => (
-                  <div key={i} className="leading-relaxed text-slate-400">
-                    <span className="text-cyan-400">$</span> {log}
+                  <div key={i} className="leading-relaxed text-slate-300 flex items-start gap-2">
+                    <span className="text-cyan-400 font-bold select-none">&gt;</span>
+                    <span>{log}</span>
                   </div>
                 ))
               ) : (
-                <div className="text-slate-600 italic">
-                  No recent scraping tasks initiated. Click &quot;Launch Scraper Job&quot; to execute real-time extraction.
+                <div className="text-slate-600 italic py-16 text-center">
+                  Telemetry stream ready. Click &quot;Execute Scraper Dispatch&quot; to begin pipeline extraction.
                 </div>
               )}
             </div>
@@ -270,3 +294,4 @@ export const ScrapingHubView: React.FC = () => {
     </div>
   );
 };
+
